@@ -30,12 +30,12 @@
     </audio>
 
     <!-- Music Control Float Button -->
-    <button id="music-toggle" class="music-btn" title="Bật/Tắt nhạc">
+    <button id="music-toggle" class="music-btn" title="Bật/Tắt nhạc" aria-label="Bật/Tắt nhạc">
         <i class="fas fa-music"></i>
     </button>
 
     <!-- Settings Gear Float Button (Secretly customize texts) -->
-    <button id="settings-toggle" class="settings-btn" title="Cài đặt lời tỏ tình">
+    <button id="settings-toggle" class="settings-btn" title="Cài đặt lời tỏ tình" aria-label="Cài đặt lời tỏ tình">
         <i class="fas fa-cog"></i>
     </button>
 
@@ -49,7 +49,7 @@
                 <p class="subtitle">Tớ có một bí mật ngọt ngào muốn gửi đến cậu. Hãy bật âm thanh và chạm vào con dấu sáp để mở thư nhé! ♪</p>
                 
                 <div class="envelope-container">
-                    <div class="sealed-envelope" id="start-envelope">
+                    <div class="sealed-envelope" id="start-envelope" role="button" tabindex="0" aria-label="Mở thư">
                         <div class="envelope-back"></div>
                         <div class="envelope-paper">
                             <div class="paper-preview-text">Gửi cậu... ❤️</div>
@@ -172,7 +172,7 @@
                 <h3 class="success-subtitle">Đã xác nhận làm người yêu của <span id="sender-name-display">Tớ</span> ❤️</h3>
                 
                 <div class="envelope-wrapper">
-                    <div class="envelope" id="envelope">
+                    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Đọc thư">
                         <div class="flap"></div>
                         <div class="pocket"></div>
                         <div class="letter">
@@ -203,7 +203,7 @@
         <div class="modal-content glass-card">
             <div class="modal-header">
                 <h2><i class="fas fa-heart-broken"></i> Cấu hình lời tỏ tình</h2>
-                <button class="close-btn" id="settings-close">&times;</button>
+                <button class="close-btn" id="settings-close" aria-label="Đóng cài đặt">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="settings-form">

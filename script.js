@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Screen 1: Start (Wax seal envelope click)
     const startEnvelope = document.getElementById("start-envelope");
     if (startEnvelope) {
-        startEnvelope.addEventListener("click", () => {
+        const handleStartEnvelopeOpen = () => {
             if (startEnvelope.classList.contains("open")) return;
 
             // Start playing music
@@ -183,6 +183,14 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 transitionTo("timeline");
             }, 1800);
+        };
+
+        startEnvelope.addEventListener("click", handleStartEnvelopeOpen);
+        startEnvelope.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleStartEnvelopeOpen();
+            }
         });
     }
 
@@ -593,12 +601,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ================= ENVELOPE INTERACTION (SUCCESS SCREEN) =================
     const envelope = document.getElementById("envelope");
-    envelope.addEventListener("click", function() {
+
+    function toggleEnvelopeOpen() {
         playClick();
-        this.classList.toggle("open");
+        envelope.classList.toggle("open");
         
         // If opened, trigger confetti burst
-        if (this.classList.contains("open")) {
+        if (envelope.classList.contains("open")) {
             setTimeout(() => {
                 confetti({
                     particleCount: 150,
@@ -606,6 +615,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     origin: { y: 0.65 }
                 });
             }, 300);
+        }
+    }
+
+    envelope.addEventListener("click", toggleEnvelopeOpen);
+    envelope.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggleEnvelopeOpen();
         }
     });
 
