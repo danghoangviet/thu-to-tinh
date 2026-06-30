@@ -30,13 +30,13 @@
     </audio>
 
     <!-- Music Control Float Button -->
-    <button id="music-toggle" class="music-btn" title="Bật/Tắt nhạc">
-        <i class="fas fa-music"></i>
+    <button id="music-toggle" class="music-btn" title="Tắt nhạc" aria-label="Tắt nhạc">
+        <i class="fas fa-music" aria-hidden="true"></i>
     </button>
 
     <!-- Settings Gear Float Button (Secretly customize texts) -->
-    <button id="settings-toggle" class="settings-btn" title="Cài đặt lời tỏ tình">
-        <i class="fas fa-cog"></i>
+    <button id="settings-toggle" class="settings-btn" title="Cài đặt lời tỏ tình" aria-label="Cài đặt lời tỏ tình">
+        <i class="fas fa-cog" aria-hidden="true"></i>
     </button>
 
     <!-- Main Container -->
@@ -202,8 +202,8 @@
     <div id="settings-modal" class="modal">
         <div class="modal-content glass-card">
             <div class="modal-header">
-                <h2><i class="fas fa-heart-broken"></i> Cấu hình lời tỏ tình</h2>
-                <button class="close-btn" id="settings-close">&times;</button>
+                <h2><i class="fas fa-heart-broken" aria-hidden="true"></i> Cấu hình lời tỏ tình</h2>
+                <button class="close-btn" id="settings-close" aria-label="Đóng cài đặt">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="settings-form">
