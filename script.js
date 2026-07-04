@@ -90,12 +90,14 @@ document.addEventListener("DOMContentLoaded", () => {
         playClick();
         if (bgMusic.paused) {
             bgMusic.play().catch(e => console.log("Audio play failed", e));
-            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+            musicToggle.innerHTML = '<i class="fas fa-music" aria-hidden="true"></i>';
             musicToggle.classList.remove("muted");
+            musicToggle.setAttribute("aria-pressed", "true");
         } else {
             bgMusic.pause();
-            musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            musicToggle.innerHTML = '<i class="fas fa-volume-mute" aria-hidden="true"></i>';
             musicToggle.classList.add("muted");
+            musicToggle.setAttribute("aria-pressed", "false");
         }
     });
 
@@ -156,6 +158,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Start playing music
             bgMusic.play().catch(e => console.log("Audio play failed", e));
+            musicToggle.innerHTML = '<i class="fas fa-music" aria-hidden="true"></i>';
+            musicToggle.classList.remove("muted");
+            musicToggle.setAttribute("aria-pressed", "true");
 
             // Play success/win sound
             successSound.currentTime = 0;
