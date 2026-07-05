@@ -90,11 +90,11 @@ document.addEventListener("DOMContentLoaded", () => {
         playClick();
         if (bgMusic.paused) {
             bgMusic.play().catch(e => console.log("Audio play failed", e));
-            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+            musicToggle.innerHTML = '<i class="fas fa-music" aria-hidden="true"></i>';
             musicToggle.classList.remove("muted");
         } else {
             bgMusic.pause();
-            musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            musicToggle.innerHTML = '<i class="fas fa-volume-mute" aria-hidden="true"></i>';
             musicToggle.classList.add("muted");
         }
     });
@@ -405,8 +405,8 @@ document.addEventListener("DOMContentLoaded", () => {
             card.dataset.index = index;
 
             card.innerHTML = `
-                <div class="card-back"><i class="fas fa-heart"></i></div>
-                <div class="card-front"><i class="fas ${icon}"></i></div>
+                <div class="card-back"><i class="fas fa-heart" aria-hidden="true"></i></div>
+                <div class="card-front"><i class="fas ${icon}" aria-hidden="true"></i></div>
             `;
 
             card.addEventListener("click", flipCard);
@@ -644,7 +644,7 @@ document.addEventListener("DOMContentLoaded", () => {
     screenshotBtn.addEventListener("click", () => {
         playClick();
         screenshotBtn.disabled = true;
-        screenshotBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang chụp...';
+        screenshotBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Đang chụp...';
 
         const element = document.getElementById("screen-success");
         // Hide screenshot button and envelope hints during snapshot
@@ -670,13 +670,13 @@ document.addEventListener("DOMContentLoaded", () => {
             link.click();
 
             screenshotBtn.disabled = false;
-            screenshotBtn.innerHTML = '<i class="fas fa-camera"></i> Chụp ảnh màn hình kỷ niệm';
+            screenshotBtn.innerHTML = '<i class="fas fa-camera" aria-hidden="true"></i> Chụp ảnh màn hình kỷ niệm';
         }).catch(err => {
             console.error("Screenshot error", err);
             shareBox.style.display = "block";
             hintText.style.display = "block";
             screenshotBtn.disabled = false;
-            screenshotBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Thử lại';
+            screenshotBtn.innerHTML = '<i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Thử lại';
         });
     });
 
