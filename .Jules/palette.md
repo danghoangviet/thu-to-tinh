@@ -1,0 +1,3 @@
+## 2026-07-05 - Interactive Elements as Divs
+**Learning:** The app implements interactive game elements like `.memory-card` as `<div>` tags with `click` event listeners instead of semantic `<button>` tags. This pattern prevents native keyboard accessibility (like tabbing to the elements or activating them with Enter/Space) for these key interactive components.
+**Action:** When building interactive components (like memory cards or envelopes), always use semantic elements like `<button>` or add appropriate `tabindex="0"`, `role="button"`, and keyboard event listeners (handling Enter and Space keys) to ensure they are fully accessible to screen reader and keyboard-only users.
