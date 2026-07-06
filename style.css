@@ -21,6 +21,12 @@
     box-sizing: border-box;
 }
 
+/* Accessibility: Focus visible outline for keyboard navigation */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
 body {
     font-family: var(--font-body);
     background: linear-gradient(-45deg, #0f051d, #290b30, #0c0214, #05010a);
