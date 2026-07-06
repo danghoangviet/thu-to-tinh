@@ -92,10 +92,14 @@ document.addEventListener("DOMContentLoaded", () => {
             bgMusic.play().catch(e => console.log("Audio play failed", e));
             musicToggle.innerHTML = '<i class="fas fa-music"></i>';
             musicToggle.classList.remove("muted");
+            musicToggle.setAttribute("aria-label", "Tắt nhạc");
+            musicToggle.setAttribute("title", "Tắt nhạc");
         } else {
             bgMusic.pause();
             musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
             musicToggle.classList.add("muted");
+            musicToggle.setAttribute("aria-label", "Bật nhạc");
+            musicToggle.setAttribute("title", "Bật nhạc");
         }
     });
 
