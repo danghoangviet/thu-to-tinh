@@ -2,195 +2,424 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gửi Người Tớ Yêu ❤️</title>
-    <!-- Google Fonts: Sacramento for cursive, Playfair Display for headings, Montserrat for clean body text -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Kỷ Niệm Tình Yêu & Hướng Tới Tương Lai ❤️</title>
+    
+    <!-- Google Fonts: Dancing Script, Great Vibes, Playfair Display, Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Sacramento&display=swap" rel="stylesheet">
-    <!-- FontAwesome for romantic icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Background Canvas for Sakura and Heart Particles -->
-    <canvas id="particle-canvas"></canvas>
+    <!-- Three.js 3D WebGL Canvas Container -->
+    <div id="webgl-container"></div>
 
-    <!-- Background Music (Romantic Acoustic Piano) -->
-    <audio id="bg-music" loop>
+    <!-- Audio Player -->
+    <audio id="bg-music" loop preload="auto">
         <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-acoustic-piano-and-strings-1002.mp3" type="audio/mpeg">
     </audio>
-    <!-- Sound Effects -->
-    <audio id="success-sound">
+    <!-- Background YouTube Player Container (Hidden safely off-screen for audio streaming) -->
+    <div id="youtube-audio-container" style="position:fixed;bottom:0;right:0;width:200px;height:200px;opacity:0.001;pointer-events:none;z-index:-999;overflow:hidden;">
+        <div id="youtube-player"></div>
+    </div>
+    <audio id="magic-sound" preload="auto">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-fairy-win-theme-1991.mp3" type="audio/mpeg">
     </audio>
-    <audio id="click-sound">
+    <audio id="sparkle-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-whoosh-2350.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="click-sound" preload="auto">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-quick-click-2514.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Music Control Float Button -->
-    <button id="music-toggle" class="music-btn" title="Bật/Tắt nhạc">
-        <i class="fas fa-music"></i>
-    </button>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav">
+        <!-- Settings Gear Button -->
+        <button id="settings-toggle" class="glass-icon-btn" title="Cài đặt kỷ niệm" aria-label="Cài đặt">
+            <i class="fas fa-sliders-h"></i>
+        </button>
 
-    <!-- Settings Gear Float Button (Secretly customize texts) -->
-    <button id="settings-toggle" class="settings-btn" title="Cài đặt lời tỏ tình">
-        <i class="fas fa-cog"></i>
-    </button>
+        <!-- 3D Lantern Tip -->
+        <div class="lantern-tip-pill" id="lantern-tip">
+            <i class="fas fa-sparkles"></i> Chạm vào đèn lồng 3D để thắp sáng ước nguyện ✨
+        </div>
+
+        <!-- Music Control Button -->
+        <button id="music-toggle" class="glass-icon-btn" title="Bật/Tắt nhạc" aria-label="Âm nhạc">
+            <i class="fas fa-music"></i>
+            <span class="music-wave"></span>
+        </button>
+    </div>
 
     <!-- Main Container -->
     <main id="app-container">
-        
-        <!-- ================= MÀN HÌNH 1: CHÀO MỪNG ================= -->
+
+        <!-- ================= CHƯƠNG 1: KHỞI ĐẦU HÀNH TRÌNH TÌNH YÊU ================= -->
         <section id="screen-welcome" class="screen active">
-            <div class="glass-card welcome-card text-center">
-                <h1 class="welcome-title text-gradient">Chào cậu...</h1>
-                <p class="subtitle">Tớ có một bí mật ngọt ngào muốn gửi đến cậu. Hãy bật âm thanh và chạm vào con dấu sáp để mở thư nhé! ♪</p>
+            <div class="glass-card welcome-box text-center">
+                <div class="ambient-glow"></div>
+                <div class="cosmic-badge">
+                    <i class="fas fa-infinity"></i> Hành Trình Tình Yêu Của Đôi Ta
+                </div>
                 
-                <div class="envelope-container">
-                    <div class="sealed-envelope" id="start-envelope">
-                        <div class="envelope-back"></div>
-                        <div class="envelope-paper">
-                            <div class="paper-preview-text">Gửi cậu... ❤️</div>
+                <!-- Bức ảnh cặp đôi lãng mạn trung tâm với khung tranh 3D & ánh sáng đèn lồng ấm áp -->
+                <div class="hero-couple-showcase" id="hero-couple-frame">
+                    <div class="hero-couple-halo"></div>
+                    <div class="hero-couple-border">
+                        <div class="frame-corner top-left"><i class="fas fa-sparkle"></i></div>
+                        <div class="frame-corner top-right"><i class="fas fa-sparkle"></i></div>
+                        <img src="romantic_couple.jpeg" alt="Couple Under Floating Lanterns" class="hero-couple-img" id="hero-couple-img">
+                        <div class="hero-glare-effect"></div>
+                        <div class="hero-couple-tag">
+                            <i class="fas fa-heart text-pink"></i> <span>Khoảnh khắc bình yên bên nhau</span>
                         </div>
-                        <div class="envelope-flap-outer">
-                            <div class="envelope-flap"></div>
-                        </div>
-                        <div class="wax-seal-wrapper">
-                            <div class="wax-seal" id="start-wax-seal">
-                                <div class="wax-seal-heart">❤</div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= MÀN HÌNH 2: TIMELINE TÌNH YÊU ================= -->
-        <section id="screen-timeline" class="screen">
-            <h2 class="section-title text-gradient">Hành Trình Của Chúng Mình</h2>
-            <p class="section-subtitle">Mỗi khoảnh khắc bên cậu đều là một điều kỳ diệu...</p>
-            
-            <div class="timeline-container">
-                <div class="timeline-line"></div>
-                
-                <!-- Milestone 1 -->
-                <div class="timeline-item left scroll-reveal">
-                    <div class="timeline-dot"><i class="fas fa-comments"></i></div>
-                    <div class="timeline-content glass-card">
-                        <span class="timeline-date" id="date-1">01/01/2026</span>
-                        <h3 id="title-1">Lần đầu gặp gỡ</h3>
-                        <p id="desc-1">Ngày đầu tiên tớ vô tình chạm ánh mắt cậu. Trái tim tớ đã lỡ mất một nhịp mà lúc đó tớ chưa hề nhận ra...</p>
-                    </div>
+                    <!-- Micro romantic sparkles around the photo frame -->
+                    <span class="photo-particle p1" title="Yêu thương">✨</span>
+                    <span class="photo-particle p2" title="Hạnh phúc">💖</span>
+                    <span class="photo-particle p3" title="Ngọt ngào">🌸</span>
                 </div>
 
-                <!-- Milestone 2 -->
-                <div class="timeline-item right scroll-reveal">
-                    <div class="timeline-dot"><i class="fas fa-heart"></i></div>
-                    <div class="timeline-content glass-card">
-                        <span class="timeline-date" id="date-2">14/02/2026</span>
-                        <h3 id="title-2">Tin nhắn thâu đêm</h3>
-                        <p id="desc-2">Những cuộc trò chuyện không đầu không cuối, những câu chúc ngủ ngon mỗi tối làm tớ mong chờ từng hồi chuông điện thoại.</p>
-                    </div>
-                </div>
+                <h1 class="hero-title text-gradient">Gửi <span class="recipient-title" id="welcome-recipient">Bảo Thương</span> ❤️</h1>
+                <p class="hero-subtitle">
+                    Cảm ơn vì em đã đến bên anh, cùng nhau đi qua bao thăng trầm và trao cho nhau những khoảnh khắc ngọt ngào nhất. Hãy cùng anh mở lại cuốn phim ký ức của chúng mình nhé...
+                </p>
 
-                <!-- Milestone 3 -->
-                <div class="timeline-item left scroll-reveal">
-                    <div class="timeline-dot"><i class="fas fa-mug-hot"></i></div>
-                    <div class="timeline-content glass-card">
-                        <span class="timeline-date" id="date-3">08/03/2026</span>
-                        <h3 id="title-3">Buổi hẹn hò đầu tiên</h3>
-                        <p id="desc-3">Ly cà phê hôm ấy ngọt ngào lạ thường. Dưới ánh đèn đường ấm áp, nụ cười của cậu làm lu mờ mọi thứ xung quanh.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center timeline-nav">
-                <button id="to-game-btn" class="btn btn-primary">
-                    <span>Khám phá tiếp <i class="fas fa-arrow-right"></i></span>
-                </button>
-            </div>
-        </section>
-
-        <!-- ================= MÀN HÌNH 3: MINI-GAME LẬT HÌNH ================= -->
-        <section id="screen-game" class="screen">
-            <h2 class="section-title text-gradient">Giải Mã Trái Tim</h2>
-            <p class="section-subtitle">Tìm các cặp biểu tượng lãng mạn giống nhau để mở khóa lời nhắn bí mật nhé! 💕</p>
-            
-            <div class="game-wrapper">
-                <div class="game-stats">
-                    <div class="stat-box glass-card">
-                        <span>Lượt lật: </span><strong id="flip-count">0</strong>
-                    </div>
-                    <div class="stat-box glass-card">
-                        <span>Cặp đã khớp: </span><strong id="match-count">0/6</strong>
-                    </div>
-                </div>
-                
-                <div class="memory-grid" id="memory-grid">
-                    <!-- Cards will be dynamically generated by JS -->
-                </div>
-                
-                <div id="game-congratulations" class="game-success-message glass-card hidden">
-                    <h3>🎉 Chúc mừng cậu!</h3>
-                    <p>Cậu đã giải mã thành công bức mật mã tình yêu!</p>
-                    <button id="to-confession-btn" class="btn btn-primary pulse-btn">
-                        <span>Nhận thư tỏ tình <i class="fas fa-envelope-open-text"></i></span>
+                <div class="hero-action-zone">
+                    <button id="start-journey-btn" class="btn btn-primary btn-lg pulse-btn btn-glow">
+                        <i class="fas fa-sparkles"></i> <span>Mở Cuốn Phim Kỷ Niệm Của Đôi Ta</span> <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- ================= MÀN HÌNH 4: LỜI TỎ TÌNH ================= -->
-        <section id="screen-confession" class="screen">
-            <div class="glass-card confession-card text-center">
-                <div class="illustration-container">
-                    <img src="romantic_couple.png" alt="Couple Illustration" class="couple-img" id="confession-img">
+        <!-- ================= CHƯƠNG 2: CUỐN PHIM KỶ NIỆM (LOVE TIMELINE) ================= -->
+        <section id="screen-timeline" class="screen">
+            <div class="glass-card timeline-main-card">
+                <div class="card-header text-center">
+                    <div class="love-meter-wrapper">
+                        <div class="love-meter-info">
+                            <span><i class="fas fa-heartbeat text-pink"></i> Chỉ số gắn kết tình yêu:</span>
+                            <strong id="love-meter-val">65%</strong>
+                        </div>
+                        <div class="love-meter-bar">
+                            <div class="love-meter-fill" id="love-meter-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    <h2 class="section-title text-gradient">Những Mảnh Ghép Thời Gian</h2>
+                    <p class="section-subtitle">Từng khoảnh khắc bên nhau đều là món quà vô giá mà anh luôn nâng niu...</p>
                 </div>
-                <h2 class="romantic-heading text-gradient">Gửi cậu, <span id="recipient-name-display">Người tớ thương</span></h2>
-                <div class="confession-message">
-                    <p id="confession-letter-text">Tớ đã gom góp hết sự can đảm của mình để làm trang web này. Suốt thời gian qua, cậu đã trở thành lý do để tớ mỉm cười mỗi ngày. Tớ không muốn bỏ lỡ cậu nữa...</p>
+
+                <!-- Timeline Milestones -->
+                <div class="timeline-stream" id="timeline-stream">
+                    <!-- Milestone 1 -->
+                    <div class="timeline-card left">
+                        <div class="milestone-badge">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="milestone-content">
+                            <div class="milestone-meta">
+                                <span class="milestone-date" id="date-1">25/05/2024</span>
+                                <span class="tag-pill">Khởi đầu</span>
+                            </div>
+                            <h3 class="milestone-title" id="title-1">Ngày định mệnh gặp gỡ</h3>
+                            <p class="milestone-desc" id="desc-1">Giữa biển người bao la, giây phút chạm ánh mắt em là khoảnh khắc kỳ diệu nhất thay đổi toàn bộ thế giới của anh.</p>
+                            <button class="cute-react-btn" data-added="12" title="Thả tim kỷ niệm">
+                                <i class="fas fa-heart"></i> Vẫn bồi hồi như ngày đầu (+12%)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 2 -->
+                    <div class="timeline-card right">
+                        <div class="milestone-badge">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="milestone-content">
+                            <div class="milestone-meta">
+                                <span class="milestone-date" id="date-2">11/06/2024</span>
+                                <span class="tag-pill">Chính thức</span>
+                            </div>
+                            <h3 class="milestone-title" id="title-2">Ngày hai ta chung một nhịp</h3>
+                            <p class="milestone-desc" id="desc-2">Cái gật đầu của em ngày hôm ấy là điều tuyệt vời nhất. Từ đó, hai mảnh ghép cô đơn đã chính thức thuộc về nhau.</p>
+                            <button class="cute-react-btn" data-added="15" title="Thả tim kỷ niệm">
+                                <i class="fas fa-heart"></i> Khoảnh khắc hạnh phúc nhất (+15%)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 3 -->
+                    <div class="timeline-card left">
+                        <div class="milestone-badge">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="milestone-content">
+                            <div class="milestone-meta">
+                                <span class="milestone-date" id="date-3">Hiện tại & Mai sau</span>
+                                <span class="tag-pill">Bên nhau</span>
+                            </div>
+                            <h3 class="milestone-title" id="title-3">Cùng nhau vượt qua sóng gió</h3>
+                            <p class="milestone-desc" id="desc-3">Đã có những lúc giận hờn, hiểu lầm, nhưng sau tất cả chúng mình vẫn chọn bao dung và nắm chặt tay nhau hơn.</p>
+                            <button class="cute-react-btn" data-added="15" title="Thả tim kỷ niệm">
+                                <i class="fas fa-heart"></i> Trân trọng từng phút giây (+15%)
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                
-                <h3 class="question-text">Cậu làm người yêu tớ nhé? ❤️</h3>
-                
-                <div class="btn-group">
-                    <button id="yes-btn" class="btn btn-yes btn-lg">Đồng ý! 🥰</button>
-                    <button id="no-btn" class="btn btn-no btn-lg">Không nha 😜</button>
+
+                <div class="timeline-footer text-center">
+                    <p class="timeline-hint-text">Cảm ơn em vì đã luôn đồng hành cùng anh suốt chặng đường qua ✨</p>
+                    <button id="to-game-btn" class="btn btn-primary pulse-btn">
+                        <span>Những điều anh muốn cảm ơn <i class="fas fa-arrow-right"></i></span>
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- ================= MÀN HÌNH 5: THÀNH CÔNG (CELEBRATION) ================= -->
-        <section id="screen-success" class="screen">
-            <div class="glass-card success-card text-center">
-                <div class="celebration-badge">
-                    <i class="fas fa-heart-circle-check"></i>
+        <!-- ================= CHƯƠNG 3: NHỮNG ĐIỀU ANH BIẾT ƠN & TRÂN QUÝ ================= -->
+        <section id="screen-game" class="screen">
+            <div class="glass-card game-main-box text-center">
+                <div class="card-header">
+                    <span class="cosmic-badge"><i class="fas fa-gift"></i> Tri Ân Người Anh Thương</span>
+                    <h2 class="section-title text-gradient">Lời Cảm Ơn Từ Trái Tim</h2>
+                    <p class="section-subtitle">Chạm vào từng vì sao để mở ra những điều anh biết ơn nhất ở em... 💕</p>
                 </div>
-                <h2 class="romantic-heading text-gradient">Hạnh Phúc Quá Đi! 🎉</h2>
-                <h3 class="success-subtitle">Đã xác nhận làm người yêu của <span id="sender-name-display">Tớ</span> ❤️</h3>
+
+                <!-- Stars grid -->
+                <div class="star-interactive-grid" id="star-grid">
+                    <!-- Dynamic rendering -->
+                </div>
+
+                <!-- Praise reveal card -->
+                <div class="revealed-praise-card" id="praise-card">
+                    <div class="praise-icon"><i class="fas fa-sparkles"></i></div>
+                    <h4 class="praise-title" id="praise-title">Chạm vào vì sao để mở lời tri ân</h4>
+                    <p class="praise-text" id="praise-text">Hãy chạm vào từng vì sao phía trên để đọc lời cảm ơn anh dành cho em nhé!</p>
+                </div>
+
+                <!-- Complete banner -->
+                <div id="game-success-panel" class="game-complete-banner hidden">
+                    <div class="celebration-sparkle">💖</div>
+                    <h3>Gắn Kết 100% Trọn Vẹn!</h3>
+                    <p>Cảm ơn vì em là chính em, và cảm ơn vì đã luôn ở bên cạnh anh...</p>
+                    <button id="to-confession-btn" class="btn btn-primary btn-glow">
+                        <span>Lắng nghe lời hứa của anh <i class="fas fa-envelope-open-text"></i></span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CHƯƠNG 4: LỜI TÂM SỰ & HẸN ƯỚC TƯƠNG LAI ================= -->
+        <section id="screen-confession" class="screen">
+            <!-- Dramatic Spotlight overlay for Stage 6 -->
+            <div class="dramatic-spotlight" id="dramatic-spotlight"></div>
+
+            <div class="glass-card confession-box text-center">
+                <!-- 3D Couple Art Frame -->
+                <div class="couple-art-frame" id="art-frame">
+                    <div class="art-layer art-glow"></div>
+                    <img src="romantic_couple.jpeg" alt="Couple Under Floating Lanterns" class="couple-art-img" id="confession-art">
+                </div>
+
+                <div class="confession-header">
+                    <span class="confession-tag"><i class="fas fa-heart"></i> Lời Hẹn Ước Tương Lai</span>
+                    <h2 class="confession-recipient text-gradient">
+                        Gửi <span id="recipient-name-display">Bảo Thương</span>,
+                    </h2>
+                </div>
+
+                <!-- Heartfelt Appreciation & Future Promise -->
+                <div class="confession-body">
+                    <p class="typewriter-text" id="confession-letter-text">
+                        Chúng mình đã cùng nhau đi qua biết bao ngày mưa ngày nắng. Được yêu và được em yêu là điều may mắn nhất trong cuộc đời anh. Cảm ơn em đã luôn ở đây, làm bến đỗ bình yên cho anh sau mỗi ngày mệt mỏi...
+                    </p>
+                </div>
+
+                <div class="question-banner">
+                    <h3 class="big-question" id="big-question-text">Chặng đường dài phía trước, em vẫn sẽ tiếp tục nắm chặt tay anh chứ? 🥰</h3>
+                    <p class="sub-question" id="sub-question-text">Cùng nhau viết tiếp những chương tương lai thật bình yên và hạnh phúc nhé!</p>
+                </div>
+
+                <!-- Interactive Vouchers Drop Area (Stage 5) -->
+                <div class="voucher-drop-zone hidden" id="voucher-drop-zone"></div>
+
+                <!-- Action Button Arena -->
+                <div class="confession-actions" id="action-arena">
+                    <button id="yes-btn" class="btn btn-yes btn-lg">
+                        <i class="fas fa-heart"></i> Chắc chắn rồi, bên nhau trọn đời! 🥰
+                    </button>
+                    <button id="no-btn" class="btn btn-no btn-lg">
+                        <span>Hông thèm nha 😜</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CHƯƠNG 5: HỢP ĐỒNG GIA HẠN VĨNH CỬU & THẢ ĐÈN TRỜI ================= -->
+        <section id="screen-success" class="screen">
+            <div class="glass-card success-container text-center">
                 
-                <div class="envelope-wrapper">
-                    <div class="envelope" id="envelope">
-                        <div class="flap"></div>
-                        <div class="pocket"></div>
-                        <div class="letter">
-                            <div class="letter-content">
-                                <p class="letter-salutation">Chào cậu thân yêu,</p>
-                                <p class="letter-body" id="success-letter-body">Cảm ơn cậu đã đồng ý! Đây là khoảnh khắc hạnh phúc nhất của tớ. Tớ hứa sẽ luôn chăm sóc, trân trọng và mang lại thật nhiều tiếng cười cho cậu. Chúng mình cùng viết tiếp những trang truyện thật đẹp nhé!</p>
-                                <p class="letter-signature" id="signature-display">Yêu cậu thật nhiều!</p>
+                <div class="success-top-badge">
+                    <div class="floating-heart-bubble">❤️</div>
+                </div>
+
+                <h1 class="success-title text-gradient">Hạnh Phúc Vì Luôn Có Nhau! 🎉</h1>
+                <p class="success-sub">
+                    Chính thức ký kết: <strong id="success-crush-name" class="text-pink">Em</strong> và <strong id="success-my-name" class="text-gold">Anh</strong> sẽ tiếp tục nắm chặt tay nhau đi đến suốt cuộc đời!
+                </p>
+
+                <!-- ================= OFFICIAL LOVE CONTRACT ================= -->
+                <div class="certificate-wrapper" id="certificate-node">
+                    <div class="cert-border-outer">
+                        <div class="cert-border-inner">
+                            <div class="cert-watermark">FOREVER</div>
+                            <div class="cert-corner tl"></div>
+                            <div class="cert-corner tr"></div>
+                            <div class="cert-corner bl"></div>
+                            <div class="cert-corner br"></div>
+
+                            <div class="cert-header">
+                                <div class="cert-title-small">CỘNG HÒA HẠNH PHÚC & YÊU THƯƠNG ĐÔI TA</div>
+                                <div class="cert-title-main">BẢN GIA HẠN HỢP ĐỒNG TÌNH YÊU</div>
+                                <div class="cert-code">MÃ HIỆU: <span id="cert-code-val">FOREVER-LOVE-UNLIMITED</span></div>
+                            </div>
+
+                            <div class="cert-body">
+                                <p class="cert-intro">Chứng nhận giao ước tình cảm giữa hai trái tim luôn hướng về nhau:</p>
+                                
+                                <div class="cert-couple-names">
+                                    <div class="partner-box">
+                                        <span class="role-tag">Bên A (Yêu Em Nhất)</span>
+                                        <h3 class="partner-name" id="cert-sender-name">Hoàng Việt</h3>
+                                    </div>
+                                    <div class="heart-connector">
+                                        <i class="fas fa-infinity"></i>
+                                    </div>
+                                    <div class="partner-box">
+                                        <span class="role-tag">Bên B (Được Cưng Chiều)</span>
+                                        <h3 class="partner-name" id="cert-recipient-name">Bảo Thương</h3>
+                                    </div>
+                                </div>
+
+                                <div class="cert-terms">
+                                    <div class="term-item"><i class="fas fa-check-circle"></i> Thời hạn hợp đồng: <strong>VĨNH CỬU (Tự động gia hạn không thể hủy)</strong></div>
+                                    <div class="term-item"><i class="fas fa-check-circle"></i> Cam kết bên A: Luôn lắng nghe, bao dung, đưa đi ăn món ngon và không bao giờ để bên B phải khóc một mình.</div>
+                                    <div class="term-item"><i class="fas fa-check-circle"></i> Cam kết bên B: Cho phép bên A được yêu thương, chăm sóc và cùng nhau già đi.</div>
+                                    <div class="term-item"><i class="fas fa-check-circle"></i> Tương lai: Cùng nhau xây đắp những ước mơ, giữ trọn bình yên trong mái ấm nhỏ.</div>
+                                </div>
+                            </div>
+
+                            <div class="cert-footer">
+                                <div class="cert-seal">
+                                    <div class="seal-stamp">
+                                        <span>ĐÃ KÝ KẾT</span>
+                                        <i class="fas fa-heart"></i>
+                                        <span>TRỌN ĐỜI</span>
+                                    </div>
+                                </div>
+                                <div class="cert-sign">
+                                    <div class="sign-date" id="cert-date-val">Ngày 07 tháng 09 năm 2026</div>
+                                    <div class="signature-hand" id="cert-sign-hand">Bên Nhau Mãi Mãi Nhé!</div>
+                                    <div class="sign-note">Chữ ký đồng lòng gắn kết</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <p class="envelope-hint"><i class="fas fa-hand-pointer"></i> Nhấp vào phong thư để đọc thư nhé!</p>
-                
-                <div class="social-share">
-                    <p>Lưu lại khoảnh khắc đáng nhớ này:</p>
-                    <button class="btn btn-share" id="screenshot-btn">
-                        <i class="fas fa-camera"></i> Chụp ảnh màn hình kỷ niệm
+
+                <!-- Interactive Wish Lantern Launcher for Future -->
+                <div class="wish-launcher-box">
+                    <h4><i class="fas fa-fire-alt text-amber"></i> Thả Đèn Lồng Ước Nguyện Tương Lai</h4>
+                    <p>Hãy viết một điều ước hoặc mở <strong>Mini Game Thả Đèn Trời</strong> để tự tay thắp sáng ngọn lửa tình yêu cùng bay lên ngàn vì sao!</p>
+                    <div class="wish-input-group">
+                        <input type="text" id="wish-input" placeholder="Ví dụ: Năm tới cùng nhau đi du lịch Đà Lạt, xây mái ấm nhỏ..." maxlength="70">
+                        <button id="send-wish-btn" class="btn btn-amber">
+                            <span>Thả Đèn Trời ✨</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ================= MINI GAME THẢ ĐÈN TRỜI INTERACTIVE MODAL ================= -->
+                <div id="lantern-game-modal" class="modal">
+                    <div class="modal-content glass-card lantern-game-content text-center">
+                        <button class="close-btn" id="lantern-game-close">&times;</button>
+                        
+                        <div class="game-stage-header">
+                            <span class="cosmic-badge"><i class="fas fa-sparkles"></i> Lễ Hội Thả Đèn Lồng Tình Yêu</span>
+                            <h3 class="text-gradient">Thắp Sáng Điều Ước Đôi Ta</h3>
+                            <p id="game-stage-instruction" class="game-instruction">Bước 1: Chọn màu đèn lồng và viết điều ước của hai người</p>
+                        </div>
+
+                        <!-- Lantern Interactive Workshop -->
+                        <div class="lantern-workshop" id="lantern-workshop">
+                            <div class="lantern-preview-stage">
+                                <div class="lantern-3d-model" id="interactive-lantern">
+                                    <div class="lantern-dome" id="lantern-dome-color"></div>
+                                    <div class="lantern-bamboo-ring"></div>
+                                    <div class="lantern-tassel">
+                                        <div class="tassel-knot"></div>
+                                        <div class="tassel-string"></div>
+                                    </div>
+                                    <div class="lantern-wish-tag" id="lantern-wish-tag">
+                                        <span id="preview-tag-text">Bên nhau trọn đời ❤️</span>
+                                    </div>
+                                    <div class="lantern-flame-core" id="lantern-flame-core">
+                                        <div class="flame-sparkle"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Color Palette Selector -->
+                            <div class="lantern-color-picker">
+                                <span class="picker-label">Màu sắc đèn lồng:</span>
+                                <div class="color-dots">
+                                    <button type="button" class="color-dot active" data-color="#ff7733" data-name="Cam Hoàng Hôn" style="background: #ff7733;"></button>
+                                    <button type="button" class="color-dot" data-color="#f43f5e" data-name="Hồng Lãng Mạn" style="background: #f43f5e;"></button>
+                                    <button type="button" class="color-dot" data-color="#fbbf24" data-name="Vàng Hạnh Phúc" style="background: #fbbf24;"></button>
+                                    <button type="button" class="color-dot" data-color="#a855f7" data-name="Tím Mộng Mơ" style="background: #a855f7;"></button>
+                                    <button type="button" class="color-dot" data-color="#38bdf8" data-name="Xanh Bình Yên" style="background: #38bdf8;"></button>
+                                </div>
+                            </div>
+
+                            <!-- Quick Preset Wishes -->
+                            <div class="quick-wishes">
+                                <span class="picker-label">Chọn nhanh lời ước:</span>
+                                <div class="wish-chips">
+                                    <button type="button" class="chip-btn">Nắm tay nhau đi khắp thế gian 🌍</button>
+                                    <button type="button" class="chip-btn">Mỗi ngày đều yêu em nhiều hơn 💖</button>
+                                    <button type="button" class="chip-btn">Cùng nhau xây dựng mái ấm nhỏ 🏡</button>
+                                    <button type="button" class="chip-btn">Mãi bình yên và hạnh phúc trọn đời 🍀</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mini Game Action Steps -->
+                        <div class="lantern-game-controls">
+                            <!-- Step 1 Button: Light the candle flame -->
+                            <button type="button" id="light-candle-btn" class="btn btn-amber btn-glow">
+                                <i class="fas fa-fire"></i> Thắp Sáng Ngọn Lửa Tình Yêu 🔥
+                            </button>
+                            <!-- Step 2 Button: Release lantern to sky -->
+                            <button type="button" id="release-sky-btn" class="btn btn-primary btn-glow hidden">
+                                <i class="fas fa-paper-plane"></i> Thả Bay Lên Trời Ngay ✨
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="success-actions">
+                    <button id="download-cert-btn" class="btn btn-download">
+                        <i class="fas fa-camera"></i> Lưu Hợp Đồng Tình Yêu (Ảnh Kỷ Niệm)
+                    </button>
+                    <button id="replay-btn" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> Xem Lại Từ Đầu
                     </button>
                 </div>
             </div>
@@ -198,11 +427,51 @@
 
     </main>
 
+    <!-- ================= FUNNY SYSTEM MODAL (STAGE 4) ================= -->
+    <div id="funny-alert-modal" class="modal">
+        <div class="modal-content glass-card alert-modal-content text-center">
+            <div class="alert-icon-anim">🚨</div>
+            <h2 class="text-gradient">CẢNH BÁO HỆ THỐNG</h2>
+            <p class="alert-msg">
+                <strong>Hợp đồng người yêu hiện tại đang có hiệu lực pháp lý cao nhất!</strong><br>
+                Hệ thống phát hiện em đang ngại ngùng nói dối lòng mình. Điều khoản không cho phép đơn phương từ chối tiếp tục yêu thương đâu nhé! 😜
+            </p>
+            <button id="alert-confirm-btn" class="btn btn-primary btn-glow">
+                <i class="fas fa-undo"></i> Em suy nghĩ lại rồi, đồng ý tiếp tục! ❤️
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= MODAL XEM & TẢI ẢNH HỢP ĐỒNG (CERTIFICATE PREVIEW MODAL) ================= -->
+    <div id="cert-preview-modal" class="modal">
+        <div class="modal-content glass-card cert-modal-content text-center">
+            <button class="close-btn" id="cert-modal-close">&times;</button>
+            <div class="cert-modal-header">
+                <span class="cosmic-badge"><i class="fas fa-check-circle"></i> Ký Kết Thành Công</span>
+                <h3 class="text-gradient">Bản Hợp Đồng Tình Yêu</h3>
+                <p class="cert-modal-sub">Đã xuất bản ảnh chất lượng cao thành công!</p>
+            </div>
+            
+            <div class="cert-preview-image-box">
+                <img id="cert-preview-img" src="" alt="Bản Hợp Đồng Tình Yêu" />
+            </div>
+
+            <div class="cert-modal-actions">
+                <a id="cert-modal-download-link" class="btn btn-primary btn-glow" download="Hop_Dong_Tinh_Yeu.png">
+                    <i class="fas fa-download"></i> Tải Về Máy Ngay
+                </a>
+            </div>
+            <p class="cert-modal-tip">
+                <i class="fas fa-mobile-alt"></i> Mẹo trên điện thoại: Bạn có thể <strong>chạm giữ vào ảnh</strong> bên trên rồi chọn <strong>"Lưu vào Ảnh"</strong>.
+            </p>
+        </div>
+    </div>
+
     <!-- ================= BẢNG CÀI ĐẶT ẨN (SETTINGS MODAL) ================= -->
     <div id="settings-modal" class="modal">
         <div class="modal-content glass-card">
             <div class="modal-header">
-                <h2><i class="fas fa-heart-broken"></i> Cấu hình lời tỏ tình</h2>
+                <h2><i class="fas fa-heart text-pink"></i> Tùy Chỉnh Kỷ Niệm Tình Yêu</h2>
                 <button class="close-btn" id="settings-close">&times;</button>
             </div>
             <div class="modal-body">
@@ -210,59 +479,55 @@
                     <div class="form-section">
                         <h3>1. Thông tin chung</h3>
                         <div class="form-group">
-                            <label for="input-recipient">Tên người nhận (Crush):</label>
-                            <input type="text" id="input-recipient" class="form-control" placeholder="Người tớ thương">
+                            <label for="input-recipient">Tên người yêu (Em):</label>
+                            <input type="text" id="input-recipient" class="form-control" placeholder="Bảo Thương">
                         </div>
                         <div class="form-group">
-                            <label for="input-sender">Tên người gửi (Bạn):</label>
-                            <input type="text" id="input-sender" class="form-control" placeholder="Tớ">
+                            <label for="input-sender">Tên của bạn (Anh):</label>
+                            <input type="text" id="input-sender" class="form-control" placeholder="Hoàng Việt">
                         </div>
                         <div class="form-group">
-                            <label for="input-music">Link nhạc nền MP3 (Tùy chọn):</label>
-                            <input type="url" id="input-music" class="form-control" placeholder="Dán link file .mp3 trực tiếp">
+                            <label for="input-music">Link nhạc nền (Hỗ trợ file .mp3 hoặc link YouTube):</label>
+                            <input type="text" id="input-music" class="form-control" placeholder="Dán link YouTube hoặc link file .mp3 trực tiếp">
                         </div>
                     </div>
 
                     <div class="form-section">
-                        <h3>2. Thư tỏ tình & Lời cảm ơn</h3>
+                        <h3>2. Tâm sự & Lời hứa</h3>
                         <div class="form-group">
-                            <label for="input-confession">Lời tỏ tình (Màn hình 4):</label>
-                            <textarea id="input-confession" class="form-control" rows="3" placeholder="Lời thổ lộ tâm tình..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="input-success-letter">Thư tình khi đồng ý (Màn hình 5):</label>
-                            <textarea id="input-success-letter" class="form-control" rows="4" placeholder="Nội dung thư tình bí mật trong phong thư..."></textarea>
+                            <label for="input-confession">Nội dung thư cảm ơn & hẹn ước:</label>
+                            <textarea id="input-confession" class="form-control" rows="4" placeholder="Lời tâm tình từ trái tim..."></textarea>
                         </div>
                     </div>
 
                     <div class="form-section">
-                        <h3>3. Mốc thời gian (Timeline)</h3>
+                        <h3>3. Các mốc kỷ niệm đáng nhớ</h3>
                         
                         <div class="milestone-config-box">
-                            <h4>Mốc 1</h4>
+                            <h4>Mốc 1 (Ngày gặp gỡ)</h4>
                             <div class="form-row">
                                 <input type="text" id="input-date-1" class="form-control" placeholder="Ngày tháng">
                                 <input type="text" id="input-title-1" class="form-control" placeholder="Tiêu đề">
                             </div>
-                            <textarea id="input-desc-1" class="form-control" rows="2" placeholder="Chi tiết khoảnh khắc..."></textarea>
+                            <textarea id="input-desc-1" class="form-control" rows="2" placeholder="Chi tiết..."></textarea>
                         </div>
 
                         <div class="milestone-config-box">
-                            <h4>Mốc 2</h4>
+                            <h4>Mốc 2 (Ngày chính thức bên nhau)</h4>
                             <div class="form-row">
                                 <input type="text" id="input-date-2" class="form-control" placeholder="Ngày tháng">
                                 <input type="text" id="input-title-2" class="form-control" placeholder="Tiêu đề">
                             </div>
-                            <textarea id="input-desc-2" class="form-control" rows="2" placeholder="Chi tiết khoảnh khắc..."></textarea>
+                            <textarea id="input-desc-2" class="form-control" rows="2" placeholder="Chi tiết..."></textarea>
                         </div>
 
                         <div class="milestone-config-box">
-                            <h4>Mốc 3</h4>
+                            <h4>Mốc 3 (Hiện tại & Mai sau)</h4>
                             <div class="form-row">
                                 <input type="text" id="input-date-3" class="form-control" placeholder="Ngày tháng">
                                 <input type="text" id="input-title-3" class="form-control" placeholder="Tiêu đề">
                             </div>
-                            <textarea id="input-desc-3" class="form-control" rows="2" placeholder="Chi tiết khoảnh khắc..."></textarea>
+                            <textarea id="input-desc-3" class="form-control" rows="2" placeholder="Chi tiết..."></textarea>
                         </div>
                     </div>
 
@@ -275,11 +540,14 @@
         </div>
     </div>
 
-    <!-- Html2canvas for screenshot capability -->
+    <!-- Libraries: Three.js for 3D PBR WebGL, GSAP for fluid animations, html2canvas, confetti, YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <!-- Confetti library for celebration effect -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <!-- Main Script -->
+
+    <!-- Main Application Logic -->
     <script src="script.js"></script>
 </body>
 </html>
