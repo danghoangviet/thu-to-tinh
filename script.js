@@ -1372,6 +1372,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // MINI GAME: THẢ ĐÈN TRỜI TƯƠNG LAI INTERACTIVE WORKSHOP
     // ==========================================================================
     const lanternModal = document.getElementById("lantern-game-modal");
+    if (lanternModal && lanternModal.parentElement !== document.body) {
+        document.body.appendChild(lanternModal);
+    }
     const lanternModalClose = document.getElementById("lantern-game-close");
     const lightCandleBtn = document.getElementById("light-candle-btn");
     const releaseSkyBtn = document.getElementById("release-sky-btn");
@@ -1411,7 +1414,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (lanternModal) {
             lanternModal.style.display = "flex";
             gsap.fromTo(lanternModal, { opacity: 0 }, { opacity: 1, duration: 0.3 });
-            gsap.fromTo(".lantern-3d-model", { scale: 0.8, y: 30 }, { scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" });
+            gsap.fromTo(".lantern-3d-model", { scale: 0.8, y: 30, opacity: 1 }, { scale: 1, y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.7)" });
         }
     }
 

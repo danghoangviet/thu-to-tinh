@@ -345,74 +345,6 @@
                     </div>
                 </div>
 
-                <!-- ================= MINI GAME THẢ ĐÈN TRỜI INTERACTIVE MODAL ================= -->
-                <div id="lantern-game-modal" class="modal">
-                    <div class="modal-content glass-card lantern-game-content text-center">
-                        <button class="close-btn" id="lantern-game-close">&times;</button>
-                        
-                        <div class="game-stage-header">
-                            <span class="cosmic-badge"><i class="fas fa-sparkles"></i> Lễ Hội Thả Đèn Lồng Tình Yêu</span>
-                            <h3 class="text-gradient">Thắp Sáng Điều Ước Đôi Ta</h3>
-                            <p id="game-stage-instruction" class="game-instruction">Bước 1: Chọn màu đèn lồng và viết điều ước của hai người</p>
-                        </div>
-
-                        <!-- Lantern Interactive Workshop -->
-                        <div class="lantern-workshop" id="lantern-workshop">
-                            <div class="lantern-preview-stage">
-                                <div class="lantern-3d-model" id="interactive-lantern">
-                                    <div class="lantern-dome" id="lantern-dome-color"></div>
-                                    <div class="lantern-bamboo-ring"></div>
-                                    <div class="lantern-tassel">
-                                        <div class="tassel-knot"></div>
-                                        <div class="tassel-string"></div>
-                                    </div>
-                                    <div class="lantern-wish-tag" id="lantern-wish-tag">
-                                        <span id="preview-tag-text">Bên nhau trọn đời ❤️</span>
-                                    </div>
-                                    <div class="lantern-flame-core" id="lantern-flame-core">
-                                        <div class="flame-sparkle"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Color Palette Selector -->
-                            <div class="lantern-color-picker">
-                                <span class="picker-label">Màu sắc đèn lồng:</span>
-                                <div class="color-dots">
-                                    <button type="button" class="color-dot active" data-color="#ff7733" data-name="Cam Hoàng Hôn" style="background: #ff7733;"></button>
-                                    <button type="button" class="color-dot" data-color="#f43f5e" data-name="Hồng Lãng Mạn" style="background: #f43f5e;"></button>
-                                    <button type="button" class="color-dot" data-color="#fbbf24" data-name="Vàng Hạnh Phúc" style="background: #fbbf24;"></button>
-                                    <button type="button" class="color-dot" data-color="#a855f7" data-name="Tím Mộng Mơ" style="background: #a855f7;"></button>
-                                    <button type="button" class="color-dot" data-color="#38bdf8" data-name="Xanh Bình Yên" style="background: #38bdf8;"></button>
-                                </div>
-                            </div>
-
-                            <!-- Quick Preset Wishes -->
-                            <div class="quick-wishes">
-                                <span class="picker-label">Chọn nhanh lời ước:</span>
-                                <div class="wish-chips">
-                                    <button type="button" class="chip-btn">Nắm tay nhau đi khắp thế gian 🌍</button>
-                                    <button type="button" class="chip-btn">Mỗi ngày đều yêu em nhiều hơn 💖</button>
-                                    <button type="button" class="chip-btn">Cùng nhau xây dựng mái ấm nhỏ 🏡</button>
-                                    <button type="button" class="chip-btn">Mãi bình yên và hạnh phúc trọn đời 🍀</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Mini Game Action Steps -->
-                        <div class="lantern-game-controls">
-                            <!-- Step 1 Button: Light the candle flame -->
-                            <button type="button" id="light-candle-btn" class="btn btn-amber btn-glow">
-                                <i class="fas fa-fire"></i> Thắp Sáng Ngọn Lửa Tình Yêu 🔥
-                            </button>
-                            <!-- Step 2 Button: Release lantern to sky -->
-                            <button type="button" id="release-sky-btn" class="btn btn-primary btn-glow hidden">
-                                <i class="fas fa-paper-plane"></i> Thả Bay Lên Trời Ngay ✨
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Action Controls -->
                 <div class="success-actions">
                     <button id="download-cert-btn" class="btn btn-download">
@@ -426,6 +358,74 @@
         </section>
 
     </main>
+
+    <!-- ================= MINI GAME THẢ ĐÈN TRỜI INTERACTIVE MODAL ================= -->
+    <div id="lantern-game-modal" class="modal">
+        <div class="modal-content glass-card lantern-game-content text-center">
+            <button class="close-btn" id="lantern-game-close">&times;</button>
+            
+            <div class="game-stage-header">
+                <span class="cosmic-badge"><i class="fas fa-sparkles"></i> Lễ Hội Thả Đèn Lồng Tình Yêu</span>
+                <h3 class="text-gradient">Thắp Sáng Điều Ước Đôi Ta</h3>
+                <p id="game-stage-instruction" class="game-instruction">Bước 1: Chọn màu đèn lồng và viết điều ước của hai người</p>
+            </div>
+
+            <!-- Lantern Interactive Workshop -->
+            <div class="lantern-workshop" id="lantern-workshop">
+                <div class="lantern-preview-stage">
+                    <div class="lantern-3d-model" id="interactive-lantern">
+                        <div class="lantern-dome" id="lantern-dome-color"></div>
+                        <div class="lantern-bamboo-ring"></div>
+                        <div class="lantern-tassel">
+                            <div class="tassel-knot"></div>
+                            <div class="tassel-string"></div>
+                        </div>
+                        <div class="lantern-wish-tag" id="lantern-wish-tag">
+                            <span id="preview-tag-text">Bên nhau trọn đời ❤️</span>
+                        </div>
+                        <div class="lantern-flame-core" id="lantern-flame-core">
+                            <div class="flame-sparkle"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Color Palette Selector -->
+                <div class="lantern-color-picker">
+                    <span class="picker-label">Màu sắc đèn lồng:</span>
+                    <div class="color-dots">
+                        <button type="button" class="color-dot active" data-color="#ff7733" data-name="Cam Hoàng Hôn" style="background: #ff7733;"></button>
+                        <button type="button" class="color-dot" data-color="#f43f5e" data-name="Hồng Lãng Mạn" style="background: #f43f5e;"></button>
+                        <button type="button" class="color-dot" data-color="#fbbf24" data-name="Vàng Hạnh Phúc" style="background: #fbbf24;"></button>
+                        <button type="button" class="color-dot" data-color="#a855f7" data-name="Tím Mộng Mơ" style="background: #a855f7;"></button>
+                        <button type="button" class="color-dot" data-color="#38bdf8" data-name="Xanh Bình Yên" style="background: #38bdf8;"></button>
+                    </div>
+                </div>
+
+                <!-- Quick Preset Wishes -->
+                <div class="quick-wishes">
+                    <span class="picker-label">Chọn nhanh lời ước:</span>
+                    <div class="wish-chips">
+                        <button type="button" class="chip-btn">Nắm tay nhau đi khắp thế gian 🌍</button>
+                        <button type="button" class="chip-btn">Mỗi ngày đều yêu em nhiều hơn 💖</button>
+                        <button type="button" class="chip-btn">Cùng nhau xây dựng mái ấm nhỏ 🏡</button>
+                        <button type="button" class="chip-btn">Mãi bình yên và hạnh phúc trọn đời 🍀</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mini Game Action Steps -->
+            <div class="lantern-game-controls">
+                <!-- Step 1 Button: Light the candle flame -->
+                <button type="button" id="light-candle-btn" class="btn btn-amber btn-glow">
+                    <i class="fas fa-fire"></i> Thắp Sáng Ngọn Lửa Tình Yêu 🔥
+                </button>
+                <!-- Step 2 Button: Release lantern to sky -->
+                <button type="button" id="release-sky-btn" class="btn btn-primary btn-glow hidden">
+                    <i class="fas fa-paper-plane"></i> Thả Bay Lên Trời Ngay ✨
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- ================= FUNNY SYSTEM MODAL (STAGE 4) ================= -->
     <div id="funny-alert-modal" class="modal">
